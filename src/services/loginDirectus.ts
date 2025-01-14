@@ -2,7 +2,7 @@
 import { login } from '@directus/sdk'
 import { client } from '../lib/directus'
 
-export const useLoginDirectus = async (email?: string, password?: string) => {
+export const loginDirectus = async (email?: string, password?: string) => {
   try {
     const userEmail = email ?? process.env.DIRECTUS_EMAIL
     const userPassword = password ?? process.env.DIRECTUS_PASSWORD
