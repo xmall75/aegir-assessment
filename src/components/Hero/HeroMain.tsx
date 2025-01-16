@@ -4,7 +4,8 @@ import { IInstrumentTable } from '../../types/instrument'
 import DataTable from '../Common/DataTable'
 import { IDirectusQuery } from '../../types/directus-query'
 import { ILessonTable } from '../../types/lesson'
-import { LessonStatus, PackageType } from '../../enum/common'
+import { LessonStatus, PackageStatus, PackageType } from '../../enum/common'
+import { IPackageTable } from '../../types/package'
 
 const instrumentColumns: TableProps<IInstrumentTable>['columns'] = [
   {
@@ -119,6 +120,79 @@ const lessonQuery: IDirectusQuery = {
   ]
 }
 
+const packageColumns: TableProps<IPackageTable>['columns'] = [
+  {
+    title: 'Instrument',
+    dataIndex: 'instrument',
+    key: 'instrument',
+    render: (_, { instrument }) => <span className="font-bold">{instrument.name}</span>
+  },
+  {
+    title: 'Package',
+    dataIndex: 'package',
+    key: 'package',
+    // convert enum to be array
+    filters: Object.values(PackageType).map((type) => ({
+      text: type,
+      value: type
+    })),
+    onFilter: (value, record) => record.name.startsWith(value as string),
+    render: (_, { name }) => <span className="font-bold">{name}</span>
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    key: 'status',
+    // convert enum to be array
+    filters: Object.values(PackageStatus).map((type) => ({
+      text: type,
+      value: type
+    })),
+    onFilter: (value, record) => record.status.startsWith(value as string),
+    render: (_, { status }) => (
+      <span
+        className={`${status === PackageStatus.Draft ? 'bg-gray-600 text-white' : status === PackageStatus.Archived ? 'bg-yellow-200' : 'bg-blue-500 text-center'} px-2 py-1 rounded-md`}
+      >
+        {status.toUpperCase()}
+      </span>
+    )
+  },
+  {
+    title: 'Student',
+    dataIndex: 'student',
+    key: 'student',
+    render: (_, { student }) => (
+      <span>
+        {student.first_name} {student.last_name}
+      </span>
+    )
+  },
+  {
+    title: 'Payment Date',
+    dataIndex: 'payment',
+    key: 'payment',
+    width: '100',
+    render: (_, { payments }) => {
+      const date = new Date(payments[0].payment_date)
+      return <span>{date.toString()}</span>
+    }
+  }
+]
+
+const packageQuery: IDirectusQuery = {
+  limit: -1,
+  fields: [
+    'id',
+    'instrument.name',
+    'name',
+    'status',
+    'student.first_name',
+    'student.last_name',
+    'payments.payment_date',
+    'payments.rate'
+  ]
+}
+
 const TabItems: TabsProps['items'] = [
   {
     key: '1',
@@ -148,7 +222,15 @@ const TabItems: TabsProps['items'] = [
   {
     key: '3',
     label: 'Packages',
-    children: 'Content of Tab Pane 3'
+    children: (
+      <DataTable
+        category="collection"
+        categoryLabel="packages"
+        tableColumns={packageColumns}
+        query={packageQuery}
+        scroll={{ x: 'max-content' }}
+      />
+    )
   },
   {
     key: '4',
