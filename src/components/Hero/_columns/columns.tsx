@@ -3,9 +3,16 @@ import { IInstrumentTable } from '../../../types/instrument'
 import { LessonStatus, PackageStatus, PackageType } from '../../../enum/common'
 import { ILessonTable } from '../../../types/lesson'
 import { IPackageTable } from '../../../types/package'
+import { IPaymentTable } from '../../../types/payment'
 
 // Instruments Columns
 export const instrumentColumns: TableProps<IInstrumentTable>['columns'] = [
+  {
+    title: 'Instrument ID',
+    dataIndex: 'id',
+    key: 'id',
+    width: '150px'
+  },
   {
     title: 'Name',
     dataIndex: 'name',
@@ -30,6 +37,12 @@ export const instrumentColumns: TableProps<IInstrumentTable>['columns'] = [
 
 // Lessons Columns
 export const lessonColumns: TableProps<ILessonTable>['columns'] = [
+  {
+    title: 'Lesson ID',
+    dataIndex: 'id',
+    key: 'id',
+    fixed: 'left'
+  },
   {
     title: 'Package',
     dataIndex: 'package',
@@ -95,6 +108,12 @@ export const lessonColumns: TableProps<ILessonTable>['columns'] = [
 // Packages Columns
 export const packageColumns: TableProps<IPackageTable>['columns'] = [
   {
+    title: 'Package ID',
+    dataIndex: 'id',
+    key: 'id',
+    fixed: true
+  },
+  {
     title: 'Instrument',
     dataIndex: 'instrument',
     key: 'instrument',
@@ -149,5 +168,52 @@ export const packageColumns: TableProps<IPackageTable>['columns'] = [
       const date = new Date(payments[0].payment_date)
       return <span>{date.toString()}</span>
     }
+  }
+]
+
+// Payments Columns
+export const paymentColumns: TableProps<IPaymentTable>['columns'] = [
+  {
+    title: 'Payment ID',
+    dataIndex: 'id',
+    key: 'id',
+    fixed: true
+  },
+  {
+    title: 'Currency',
+    dataIndex: 'currency',
+    key: 'currency',
+    render: (_, { currency }) => <span className="font-bold">{currency.toUpperCase()}</span>
+  },
+  {
+    title: 'Rate',
+    dataIndex: 'rate',
+    key: 'rate'
+  },
+  {
+    title: 'Payment Date',
+    dataIndex: 'payment',
+    key: 'payment',
+    width: '100',
+    render: (_, { payment_date }) => {
+      const date = new Date(payment_date)
+      return <span>{date.toString()}</span>
+    }
+  },
+  {
+    title: 'Package ID',
+    dataIndex: 'packageId',
+    key: 'packageId',
+    render: (_, { package: pkg }) => <span>{pkg.id}</span>
+  },
+  {
+    title: 'Student',
+    dataIndex: 'student',
+    key: 'student',
+    render: (_, { package: pkg }) => (
+      <span>
+        {pkg.student.first_name} {pkg.student.last_name}
+      </span>
+    )
   }
 ]

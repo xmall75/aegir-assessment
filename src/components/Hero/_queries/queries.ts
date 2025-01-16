@@ -43,3 +43,17 @@ export const packageQuery: IDirectusQuery = {
     'payments.rate'
   ]
 }
+
+// Payments
+export const paymentQuery: IDirectusQuery = {
+  limit: -1,
+  fields: [
+    'id',
+    'currency',
+    'rate',
+    'payment_date',
+    'package.id',
+    'package.student.first_name',
+    'package.student.last_name'
+  ]
+}

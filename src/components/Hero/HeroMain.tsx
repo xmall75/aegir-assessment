@@ -1,8 +1,13 @@
 import { Tabs } from 'antd'
 import type { TabsProps } from 'antd'
 import DataTable from '../Common/DataTable'
-import { instrumentColumns, lessonColumns, packageColumns } from './_columns/columns'
-import { instrumentQuery, lessonQuery, packageQuery } from './_queries/queries'
+import {
+  instrumentColumns,
+  lessonColumns,
+  packageColumns,
+  paymentColumns
+} from './_columns/columns'
+import { instrumentQuery, lessonQuery, packageQuery, paymentQuery } from './_queries/queries'
 
 const TabItems: TabsProps['items'] = [
   {
@@ -46,7 +51,15 @@ const TabItems: TabsProps['items'] = [
   {
     key: '4',
     label: 'Payments',
-    children: 'Content of Tab Pane 3'
+    children: (
+      <DataTable
+        category="collection"
+        categoryLabel="payments"
+        tableColumns={paymentColumns}
+        query={paymentQuery}
+        scroll={{ x: 'max-content' }}
+      />
+    )
   },
   {
     key: '5',
