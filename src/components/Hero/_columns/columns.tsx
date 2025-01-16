@@ -4,6 +4,7 @@ import { LessonStatus, PackageStatus, PackageType } from '../../../enum/common'
 import { ILessonTable } from '../../../types/lesson'
 import { IPackageTable } from '../../../types/package'
 import { IPaymentTable } from '../../../types/payment'
+import { IUserTable } from '../../../types/user'
 
 // Instruments Columns
 export const instrumentColumns: TableProps<IInstrumentTable>['columns'] = [
@@ -215,5 +216,27 @@ export const paymentColumns: TableProps<IPaymentTable>['columns'] = [
         {pkg.student.first_name} {pkg.student.last_name}
       </span>
     )
+  }
+]
+
+// Roles Columns - for Students & Teachers
+export const roleColumns: TableProps<IUserTable>['columns'] = [
+  {
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email'
+  },
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+    width: '100',
+    render: (_, { first_name, last_name }) => {
+      return (
+        <span className="font-bold">
+          {first_name} {last_name}
+        </span>
+      )
+    }
   }
 ]

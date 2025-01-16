@@ -57,3 +57,24 @@ export const paymentQuery: IDirectusQuery = {
     'package.student.last_name'
   ]
 }
+
+// Roles - Student
+export const roleStudentQuery: IDirectusQuery = {
+  limit: -1,
+  fields: ['id', 'users.id', 'users.email', 'users.first_name', 'users.last_name'],
+  filter: {
+    name: {
+      _eq: 'Student'
+    }
+  }
+}
+
+export const roleTeacherQuery: IDirectusQuery = {
+  limit: -1,
+  fields: ['id', 'users.id', 'users.email', 'users.first_name', 'users.last_name'],
+  filter: {
+    name: {
+      _eq: 'Teacher'
+    }
+  }
+}

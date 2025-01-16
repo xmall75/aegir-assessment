@@ -5,9 +5,19 @@ import {
   instrumentColumns,
   lessonColumns,
   packageColumns,
-  paymentColumns
+  paymentColumns,
+  roleColumns
 } from './_columns/columns'
-import { instrumentQuery, lessonQuery, packageQuery, paymentQuery } from './_queries/queries'
+import {
+  instrumentQuery,
+  lessonQuery,
+  packageQuery,
+  paymentQuery,
+  roleStudentQuery,
+  roleTeacherQuery
+} from './_queries/queries'
+import { useEffect, useState } from 'react'
+import { loginDirectus } from '../../services/loginDirectus'
 
 const TabItems: TabsProps['items'] = [
   {
@@ -64,19 +74,57 @@ const TabItems: TabsProps['items'] = [
   {
     key: '5',
     label: 'Students',
-    children: 'Content of Tab Pane 3'
+    children: (
+      <DataTable
+        category="roles"
+        tableColumns={roleColumns}
+        query={roleStudentQuery}
+        scroll={{ x: 'max-content' }}
+      />
+    )
   },
   {
     key: '6',
     label: 'Teachers',
-    children: 'Content of Tab Pane 3'
+    children: (
+      <DataTable
+        category="roles"
+        tableColumns={roleColumns}
+        query={roleTeacherQuery}
+        scroll={{ x: 'max-content' }}
+      />
+    )
   }
 ]
 
 const HeroMain = () => {
+  const [loading, setLoading] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    const login = async () => {
+      const login = await loginDirectus()
+      setLoading(false)
+
+      if (!login) {
+        setIsLoggedIn(false)
+      } else {
+        setIsLoggedIn(true)
+      }
+    }
+
+    login()
+  }, [])
+
   return (
     <div className="w-[95%] lg:w-[80%] xl:w-[75%] mx-auto">
-      <Tabs defaultActiveKey="1" items={TabItems} />
+      {loading ? (
+        'Please wait ...'
+      ) : isLoggedIn ? (
+        <Tabs defaultActiveKey="1" items={TabItems} />
+      ) : (
+        'You are not allowed to see the data'
+      )}
     </div>
   )
 }
