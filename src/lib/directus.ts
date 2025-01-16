@@ -1,3 +1,5 @@
-import { createDirectus, rest } from '@directus/sdk'
+import { authentication, createDirectus, rest } from '@directus/sdk'
 
-export const client = createDirectus(process.env.BASE_URL + '/api').with(rest())
+export const client = createDirectus(process.env.BASE_URL + '/api')
+  .with(authentication('json'))
+  .with(rest())

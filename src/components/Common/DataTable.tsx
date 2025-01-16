@@ -6,7 +6,7 @@ import { IDirectusQuery } from '../../types/directus-query'
 
 interface DataTableProps<T> {
   category: string
-  categoryLabel: string
+  categoryLabel?: string
   tableColumns: TableProps<T>['columns']
   query?: IDirectusQuery
 }
@@ -17,12 +17,13 @@ const DataTable = <T extends object>(props: DataTableProps<T> & Omit<TableProps<
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result =
-          props.category === 'collection'
-            ? await getItems(props.categoryLabel, props.query)
-            : await getRoles(props.query)
+        const isCollection = props.category === 'collection'
 
-        setData(result as T[])
+        const result = isCollection
+          ? await getItems(props.categoryLabel as string, props.query)
+          : await getRoles(props.query)
+
+        setData(isCollection ? (result as T[]) : (result[0].users as T[]))
       } catch (error) {
         throw new Error(error as string)
       }
