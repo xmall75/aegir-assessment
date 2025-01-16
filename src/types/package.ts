@@ -4,6 +4,7 @@ import { IUserTable } from './user'
 
 export interface IPackageTable {
   key: string
+  id: string | number
   name: string
   status: PackageStatus
   instrument: IInstrumentTable

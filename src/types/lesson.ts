@@ -3,6 +3,7 @@ import { IUserTable } from './user'
 
 export interface ILessonTable {
   key: string
+  id: string | number
   package: { name: string; student: IUserTable }
   start_datetime: Date
   status: LessonStatus

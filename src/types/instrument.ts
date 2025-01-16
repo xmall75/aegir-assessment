@@ -6,6 +6,7 @@ export interface IJunctionInstrumentUser {
 
 export interface IInstrumentTable {
   key: string
+  id: string | number
   name: string
   students: IJunctionInstrumentUser[]
   teachers: IJunctionInstrumentUser[]
