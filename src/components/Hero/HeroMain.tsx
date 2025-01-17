@@ -27,6 +27,7 @@ const TabItems: TabsProps['items'] = [
         categoryLabel="instruments"
         tableColumns={instrumentColumns}
         query={instrumentQuery}
+        scroll={{ x: 'max-content' }}
       />
     )
   },
@@ -98,6 +99,7 @@ const TabItems: TabsProps['items'] = [
 const HeroMain = () => {
   return (
     <div className="w-[95%] lg:w-[80%] xl:w-[75%] mx-auto">
+      <h2>Data Table</h2>
       <Tabs defaultActiveKey="1" items={TabItems} />
     </div>
   )

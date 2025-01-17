@@ -34,7 +34,8 @@ export const instrumentColumns: TableProps<IInstrumentTable>['columns'] = [
     title: 'Instrument ID',
     dataIndex: 'id',
     key: 'id',
-    width: '150px'
+    width: '150px',
+    fixed: 'left'
   },
   {
     title: 'Name',
