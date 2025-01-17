@@ -61,7 +61,7 @@ export const paymentQuery: IDirectusQuery = {
 // Roles - Student
 export const roleStudentQuery: IDirectusQuery = {
   limit: -1,
-  fields: ['id', 'users.id', 'users.email', 'users.first_name', 'users.last_name'],
+  fields: ['id', 'name', 'users.id', 'users.email', 'users.first_name', 'users.last_name'],
   filter: {
     name: {
       _eq: 'Student'
@@ -71,7 +71,7 @@ export const roleStudentQuery: IDirectusQuery = {
 
 export const roleTeacherQuery: IDirectusQuery = {
   limit: -1,
-  fields: ['id', 'users.id', 'users.email', 'users.first_name', 'users.last_name'],
+  fields: ['id', 'name', 'users.id', 'users.email', 'users.first_name', 'users.last_name'],
   filter: {
     name: {
       _eq: 'Teacher'

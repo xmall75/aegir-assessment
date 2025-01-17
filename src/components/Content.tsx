@@ -1,3 +1,4 @@
+import DataVisualization from './DataVisualization/DataVisualization'
 import HeroMain from './Hero/HeroMain'
 
 const Content = () => {
@@ -7,6 +8,7 @@ const Content = () => {
         <h1>Aegir Assessment</h1>
       </div>
       <HeroMain />
+      <DataVisualization />
     </>
   )
 }
