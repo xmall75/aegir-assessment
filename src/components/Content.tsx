@@ -1,3 +1,4 @@
+import DataAddition from './DataAddition/DataAddition'
 import DataVisualization from './DataVisualization/DataVisualization'
 import HeroMain from './Hero/HeroMain'
 
@@ -9,6 +10,7 @@ const Content = () => {
       </div>
       <HeroMain />
       <DataVisualization />
+      <DataAddition />
     </>
   )
 }
