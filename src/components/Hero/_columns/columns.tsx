@@ -1,10 +1,32 @@
-import type { TableProps } from 'antd'
-import { IInstrumentTable } from '../../../types/instrument'
+import { Modal, Tooltip, type TableProps } from 'antd'
+import { IInstrumentTable, IJunctionInstrumentUser } from '../../../types/instrument'
 import { LessonStatus, PackageStatus, PackageType } from '../../../enum/common'
 import { ILessonTable } from '../../../types/lesson'
 import { IPackageTable } from '../../../types/package'
 import { IPaymentTable } from '../../../types/payment'
 import { IUserTable } from '../../../types/user'
+import { FaEye } from 'react-icons/fa'
+
+export const handleShowUsersModal = (users: IJunctionInstrumentUser[], title?: string) => {
+  Modal.info({
+    title: title ?? 'List Users',
+    content: (
+      <div>
+        {users.map((user, index) => {
+          const { teachers_id, students_id } = user
+          return (
+            <p key={index}>
+              {teachers_id !== undefined && `${teachers_id.first_name} ${teachers_id.last_name}`}
+              {students_id !== undefined && `${students_id.first_name} ${students_id.last_name}`}
+            </p>
+          )
+        })}
+      </div>
+    ),
+    maskClosable: true,
+    okText: 'Close'
+  })
+}
 
 // Instruments Columns
 export const instrumentColumns: TableProps<IInstrumentTable>['columns'] = [
@@ -25,14 +47,34 @@ export const instrumentColumns: TableProps<IInstrumentTable>['columns'] = [
     dataIndex: 'students',
     key: 'students',
     sorter: (a, b) => a.students.length - b.students.length,
-    render: (_, { students }) => <span>{students.length}</span>
+    render: (_, { students }) => (
+      <div className="flex gap-2 items-center">
+        <span>{students.length}</span>{' '}
+        <Tooltip title="View Students">
+          <FaEye
+            onClick={() => handleShowUsersModal(students, 'List Students')}
+            className="w-[30px] hover:text-gray-500 cursor-pointer"
+          />
+        </Tooltip>
+      </div>
+    )
   },
   {
     title: 'Teachers',
     dataIndex: 'teachers',
     key: 'teachers',
     sorter: (a, b) => a.teachers.length - b.teachers.length,
-    render: (_, { teachers }) => <span>{teachers.length}</span>
+    render: (_, { teachers }) => (
+      <div className="flex gap-2 items-center">
+        <span>{teachers.length}</span>{' '}
+        <Tooltip title="View Teachers">
+          <FaEye
+            onClick={() => handleShowUsersModal(teachers, 'List Teachers')}
+            className="w-[30px] hover:text-gray-500 cursor-pointer"
+          />
+        </Tooltip>
+      </div>
+    )
   }
 ]
 
