@@ -3,7 +3,7 @@ import { IInstrumentTable } from '../../../types/instrument'
 import { Bar, Pie } from 'react-chartjs-2'
 import { useEffect, useState } from 'react'
 import { getItems } from '../../../services/getItems'
-import { instrumentQuery } from '../../Hero/_queries/queries'
+import { instrumentQuery, roleStudentTeacherQuery } from '../../../queries/queries'
 import { IUserTable } from '../../../types/user'
 import { getRoles } from '../../../services/getRoles'
 
@@ -82,15 +82,7 @@ export const UsersChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getRoles({
-          limit: -1,
-          fields: ['id', 'name', 'users.id', 'users.email', 'users.first_name', 'users.last_name'],
-          filter: {
-            name: {
-              _in: ['Student', 'Teacher']
-            }
-          }
-        })
+        const result = await getRoles(roleStudentTeacherQuery)
 
         setStudentsData(result[0].users as IUserTable[])
         setTeachersData(result[1].users as IUserTable[])

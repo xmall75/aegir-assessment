@@ -1,4 +1,4 @@
-import { IDirectusQuery } from '../../../types/directus-query'
+import { IDirectusQuery } from '../types/directus-query'
 
 // Instruments
 export const instrumentQuery: IDirectusQuery = {
@@ -75,6 +75,17 @@ export const roleTeacherQuery: IDirectusQuery = {
   filter: {
     name: {
       _eq: 'Teacher'
+    }
+  }
+}
+
+// Roles - Student & Teacher
+export const roleStudentTeacherQuery: IDirectusQuery = {
+  limit: -1,
+  fields: ['id', 'name', 'users.id', 'users.email', 'users.first_name', 'users.last_name'],
+  filter: {
+    name: {
+      _in: ['Student', 'Teacher']
     }
   }
 }

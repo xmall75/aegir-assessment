@@ -15,7 +15,7 @@ import {
   paymentQuery,
   roleStudentQuery,
   roleTeacherQuery
-} from './_queries/queries'
+} from '../../queries/queries'
 
 const TabItems: TabsProps['items'] = [
   {
