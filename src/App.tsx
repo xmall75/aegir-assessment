@@ -1,12 +1,41 @@
-import HeroMain from './components/Hero/HeroMain'
+import { useEffect, useState } from 'react'
+import { loginDirectus } from './services/loginDirectus'
+import Content from './components/Content'
 
 const App = () => {
+  const [loading, setLoading] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  const handleLogin = async () => {
+    return await loginDirectus()
+  }
+
+  useEffect(() => {
+    const login = async () => {
+      const login = await handleLogin()
+      setLoading(false)
+
+      if (!login) {
+        setIsLoggedIn(false)
+      } else {
+        setIsLoggedIn(true)
+      }
+    }
+
+    login()
+  }, [])
+
   return (
     <>
-      <div className="w-full text-center">
-        <h1>Aegir Assessment</h1>
-      </div>
-      <HeroMain />
+      {loading ? (
+        <p className="text-center">Please wait ...</p>
+      ) : isLoggedIn ? (
+        <Content />
+      ) : (
+        <button className="mx-auto" type="button" onClick={handleLogin}>
+          Login
+        </button>
+      )}
     </>
   )
 }

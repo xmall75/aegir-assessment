@@ -16,8 +16,6 @@ import {
   roleStudentQuery,
   roleTeacherQuery
 } from './_queries/queries'
-import { useEffect, useState } from 'react'
-import { loginDirectus } from '../../services/loginDirectus'
 
 const TabItems: TabsProps['items'] = [
   {
@@ -98,33 +96,9 @@ const TabItems: TabsProps['items'] = [
 ]
 
 const HeroMain = () => {
-  const [loading, setLoading] = useState(true)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-  useEffect(() => {
-    const login = async () => {
-      const login = await loginDirectus()
-      setLoading(false)
-
-      if (!login) {
-        setIsLoggedIn(false)
-      } else {
-        setIsLoggedIn(true)
-      }
-    }
-
-    login()
-  }, [])
-
   return (
     <div className="w-[95%] lg:w-[80%] xl:w-[75%] mx-auto">
-      {loading ? (
-        'Please wait ...'
-      ) : isLoggedIn ? (
-        <Tabs defaultActiveKey="1" items={TabItems} />
-      ) : (
-        'You are not allowed to see the data'
-      )}
+      <Tabs defaultActiveKey="1" items={TabItems} />
     </div>
   )
 }
