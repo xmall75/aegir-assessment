@@ -1,50 +1,81 @@
-# React + TypeScript + Vite
+# Aegir Assessment with React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Prerequisites
 
-Currently, two official plugins are available:
+Before you begin, ensure you have met the following requirements:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Node.js**: The project uses Node.js, version `v18.X.X` or later. Download the appropriate version from [nodejs.org](https://nodejs.org/).
 
-## Expanding the ESLint configuration
+- **npm**: The project utilizes npm as the package manager. Verify that you have the latest version installed with `npm -v`.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Layers and Functions
 
-- Configure the top-level `parserOptions` property like this:
+### Assets
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname
-    }
-  }
-})
+- **Location**: `assets` folder
+- **Function**: Contains data such as json and svgs.
+
+### Components
+
+- **Location**: `components` folder
+- **Function**: Contains reusable and code splitted components.
+
+### Contexts
+
+- **Location**: `contexts` folder
+- **Function**: Used for providing state and methods to multiple components.
+
+### Enums
+
+- **Location**: `enum` folder
+- **Function**: Defines constants as enumerations to ensure consistent and type-safe usage of specific sets of values across the application.
+
+### Lib
+
+- **Location**: `lib` folder
+- **Function**: Handles simple method that can be called anytime. Usually this folder contains function to initialize something. For example initialize Directus.
+
+### Queries
+
+- **Location**: `queries` folder
+- **Function**: Manages API query definitions and logic.
+
+### Schemas
+
+- **Location**: `schemas` folder
+- **Function**: Defines data validation and transformation rules using Zod to ensure input or API response data meets the required structure and format.
+
+### Services
+
+- **Location**: `services` folder
+- **Function**: Contains modules responsible for handling business logic and interacting with external APIs or internal application layers.
+
+### Types
+
+- **Location**: `types` folder
+- **Function**: Includes data types to be used for the data.
+
+## Getting Started
+
+To run the web app, follow these steps:
+
+1. Install dependencies:
+
+```shell
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Run command:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- Development:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules
-  }
-})
+```shell
+npm run dev
+```
+
+- Production:
+
+```shell
+npm run build
+npm run preview
 ```
