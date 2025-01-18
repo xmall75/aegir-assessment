@@ -6,6 +6,7 @@ const App = () => {
   const [loading, setLoading] = useState(true)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+  // login to the directus so we can fetch the data
   const handleLogin = async () => {
     return await loginDirectus()
   }

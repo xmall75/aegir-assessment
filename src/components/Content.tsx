@@ -2,6 +2,7 @@ import DataAddition from './DataAddition/DataAddition'
 import DataVisualization from './DataVisualization/DataVisualization'
 import HeroMain from './Hero/HeroMain'
 
+// Main Content
 const Content = () => {
   return (
     <>

@@ -7,6 +7,8 @@ import { IPaymentTable } from '../../../types/payment'
 import { IUserTable } from '../../../types/user'
 import { FaEye } from 'react-icons/fa'
 
+// Columns for the table on Hero section
+
 export const handleShowUsersModal = (users: IJunctionInstrumentUser[], title?: string) => {
   Modal.info({
     title: title ?? 'List Users',

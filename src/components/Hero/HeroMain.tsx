@@ -17,6 +17,7 @@ import {
   roleTeacherQuery
 } from '../../queries/queries'
 
+// Tabs on Hero
 const TabItems: TabsProps['items'] = [
   {
     key: '1',
@@ -96,6 +97,7 @@ const TabItems: TabsProps['items'] = [
   }
 ]
 
+// Hero Component
 const HeroMain = () => {
   return (
     <div className="w-[95%] lg:w-[80%] xl:w-[75%] mx-auto">

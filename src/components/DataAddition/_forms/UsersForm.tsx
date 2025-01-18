@@ -4,6 +4,7 @@ import { UserValidationRule } from '../../../schemas/user.schema'
 import { DirectusUser } from '@directus/sdk'
 import { createUser } from '../../../services/createUser'
 
+// Form to create a new user
 const UsersForm = () => {
   const { rolesData, isLoading } = useRoles()
   const options = rolesData?.map((role) => ({

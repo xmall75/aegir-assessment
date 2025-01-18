@@ -7,6 +7,7 @@ import { instrumentQuery, roleStudentTeacherQuery } from '../../../queries/queri
 import { IUserTable } from '../../../types/user'
 import { getRoles } from '../../../services/getRoles'
 
+// Chart options & Components for Data Visualization section
 ChartJS.register(...registerables)
 
 // Instruments

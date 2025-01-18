@@ -19,6 +19,9 @@ const DataTable = <T extends object>(props: DataTableProps<T> & Omit<TableProps<
       try {
         const isCollection = props.category === 'collection'
 
+        // if it's a collection, then we get the items
+        // otherwise, we get the roles because we want
+        // to show users based on the roles
         const result = isCollection
           ? await getItems(props.categoryLabel as string, props.query)
           : await getRoles(props.query)

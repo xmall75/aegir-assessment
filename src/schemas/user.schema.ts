@@ -1,6 +1,7 @@
 import { createSchemaFieldRule } from 'antd-zod'
 import { z } from 'zod'
 
+// Validation Schema for User Form
 export const UserValidationSchema = z.object({
   first_name: z.string({ required_error: 'First name is required' }),
   last_name: z.string().optional(),
